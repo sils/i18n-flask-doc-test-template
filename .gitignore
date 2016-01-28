@@ -9,3 +9,5 @@ __pycache__
 .cache
 .coverage*
 client/vendor/
+messages.pot
+messages.mo

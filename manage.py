@@ -4,6 +4,7 @@
 This is an application management application that allows to run the server.
 """
 
+import os
 from os import environ
 from subprocess import Popen, call
 from sys import executable
@@ -56,6 +57,25 @@ def docs():
     """
     call(['sphinx-apidoc', 'server', '-o', 'docs', '-f'])
     return call(['make', '-C', 'docs', 'html'])
+
+
+@manager.command
+def extract_translations():
+    call(['pybabel', 'extract', '-F', 'babel.cfg', '-o', 'messages.pot', '.'])
+    for language in app.config['LANGUAGES']:
+        if language == 'en':
+            continue
+        if os.path.exists(os.path.join('server', 'translations', language)):
+            call(['pybabel', 'update', '-i', 'messages.pot', '-d',
+                  'server/translations', '-l', language])
+        else:
+            call(['pybabel', 'init', '-i', 'messages.pot', '-d',
+                  'server/translations', '-l', language])
+
+
+@manager.command
+def compile_translations():
+    return call(['pybabel', 'compile', '-d', 'server/translations/'])
 
 
 if __name__ == '__main__':
