@@ -61,6 +61,9 @@ def docs():
 
 @manager.command
 def extract_translations():
+    '''
+    Extracts translations from templates and code into a messages catalog.
+    '''
     call(['pybabel', 'extract', '-F', 'babel.cfg', '-o', 'messages.pot', '.'])
     for language in app.config['LANGUAGES']:
         if language == 'en':
@@ -75,6 +78,9 @@ def extract_translations():
 
 @manager.command
 def compile_translations():
+    '''
+    Build translations.
+    '''
     return call(['pybabel', 'compile', '-d', 'server/translations/'])
 
 
