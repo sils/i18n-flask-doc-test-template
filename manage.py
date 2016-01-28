@@ -49,5 +49,14 @@ def coala(noninteractive=False):
         return call('coala')
 
 
+@manager.command
+def docs():
+    """
+    Builds the documentation.
+    """
+    call(['sphinx-apidoc', 'server', '-o', 'docs', '-f'])
+    return call(['make', '-C', 'docs', 'html'])
+
+
 if __name__ == '__main__':
     manager.run()
