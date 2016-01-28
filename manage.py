@@ -5,6 +5,7 @@ This is an application management application that allows to run the server.
 """
 
 from flask_script import Manager
+
 from server.app import app
 
 manager = Manager(app)

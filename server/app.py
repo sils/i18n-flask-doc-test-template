@@ -2,7 +2,7 @@
 Contains the main Flask application.
 """
 
-from os.path import dirname, abspath, join
+from os.path import abspath, dirname, join
 
 from flask import Flask
 
