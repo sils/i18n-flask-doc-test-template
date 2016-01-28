@@ -4,13 +4,33 @@
 This is an application management application that allows to run the server.
 """
 
-from subprocess import call
+from os import environ
+from subprocess import Popen, call
+from sys import executable
 
 from flask_script import Manager
 
 from server.app import app
 
 manager = Manager(app)
+
+
+@manager.command
+def test():
+    """
+    Runs all tests. While doing so, it configures the app to run with the
+    TESTING property enabled:
+
+    >>> app.config['TESTING']
+    True
+
+    :return: 0 if all tests pass.
+    """
+    test_environ = dict(environ)
+    test_environ['FLASK_DB'] = 'sqlite:///test.db'
+    test_environ['FLASK_TESTING'] = 'True'
+    proc = Popen([executable, '-m', 'pytest'], env=test_environ)
+    return proc.wait()
 
 
 @manager.command
