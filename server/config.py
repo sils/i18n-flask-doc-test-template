@@ -6,6 +6,6 @@ from os import environ
 
 BABEL_DEFAULT_LOCALE = 'en'
 BABEL_DEFAULT_TIMEZONE = 'UTC'
-LANGUAGES = {'en'}
+LANGUAGES = {'en', 'es'}
 
 TESTING = environ.get("FLASK_TESTING") is not None
