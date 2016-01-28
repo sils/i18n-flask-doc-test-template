@@ -1,0 +1,38 @@
+[Default]  # All those settings are inherited to all sections
+ignore = client/vendor/**, migrations/**, docs/**
+
+[autopep8]
+files = **/*.py
+bears = PEP8Bear
+default_actions = PEP8Bear: ApplyPatchAction
+
+[autofixotherpython]  # New section to avoid conflicts with autopep8
+files = **/*.py
+bears = PyImportSortBear, PyUnusedCodeBear
+default_actions =
+    PyImportSortBear: ApplyPatchAction,
+    PyUnusedCodeBear: ApplyPatchAction
+
+[python]
+files = **/*.py
+bears = PEP8Bear, PyLintBear
+use_spaces = True
+# The following yield false positives in PyLint, e.g. it doesn't understand some
+# of the Flask magic.
+pylint_disable = R0903, C0103, E1101, E1120
+
+[json]
+bears = JSONFormatBear
+files = **/*.json, .bowerrc
+tab_width = 2
+
+[js]
+bears = JSHintBear
+files = **/*.js
+
+[css]
+bears = CSSLintBear
+files = **/*.css
+
+[commits]
+bears = GitCommitBear
