@@ -21,6 +21,10 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
+    """
+    Called before the endpoints are queried to determine the best language from
+    the request headers.
+    """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 # Start ignoring PyImportSortBear and PyLintBear (Those imports use app)
